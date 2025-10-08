@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# Inforce Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Репозиторій **inforce-task** — це демо‑проєкт для керування товарами (CRUD) з можливістю додавання та видалення коментарів.  
+Стек побудовано на **React + Vite + Redux Toolkit (RTK Query)**, з валідацією через **Zod**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Структура проєкту
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+/backend              # код серверної частини (Flask або інший API)
+/src                  # фронтенд частина (React)
+ ├─ /components        # повторно використовувані UI-компоненти
+ ├─ /pages             # сторінки: список, деталі продукту тощо
+ ├─ /state             # RTK Query API, Redux store
+ ├─ /schemas           # Zod схеми для валідації
+ ├─ App.tsx            # головний компонент застосунку
+ ├─ main.tsx           # точка входу (ReactDOM.createRoot)
+vite.config.ts         # конфігурація Vite
+tsconfig.json          # налаштування TypeScript
+package.json           # залежності та скрипти
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Запуск проєкту
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Клонувати репозиторій:
+   ```bash
+   git clone https://github.com/qu1etness/inforce-task.git
+   ```
+
+2. Перейти до папки:
+   ```bash
+   cd inforce-task
+   ```
+
+3. Встановити залежності:
+   ```bash
+   npm install
+   ```
+
+4. Запустити дев-сервер:
+   ```bash
+   npm run dev
+   ```
+
+5. (Опціонально) Запустити бекенд, якщо використовується Flask:
+   ```bash
+   cd backend
+   python app.py
+   ```
+
+---
+
+## 🧰 Використані технології
+
+- ⚛️ React 19 + TypeScript  
+- ⚡️ Vite  
+- 🧩 React Router v7  
+- 🧠 Redux Toolkit + RTK Query  
+- 🧮 Zod для валідації форм  
+- 🎨 Tailwind CSS  
+
+---
+
+## 🔄 Функціонал
+
+- Отримання списку продуктів  
+- Перегляд детальної інформації про продукт  
+- Додавання нового продукту (з валідацією)  
+- Видалення продукту  
+- Перегляд коментарів товару  
+- Додавання / видалення коментарів  
+- Автоматичне оновлення кешу через RTK Query (`invalidatesTags`)  
+
+---
+
+
+## ⚙️ Налаштування API
+
+Файл: `src/state/products-api.ts`  
+Редагуй `baseUrl`, щоб підключитися до свого бекенду:
+```ts
+baseUrl: "http://127.0.0.1:5000"
 ```
+
+---
+
